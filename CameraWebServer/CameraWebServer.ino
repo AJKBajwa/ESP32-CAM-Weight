@@ -13,8 +13,8 @@
 //#define CAMERA_MODEL_M5STACK_PSRAM
 #define CAMERA_MODEL_AI_THINKER
 
-const char* ssid = "PTCL-Baj";
-const char* password = "lenovo123455";
+const char* ssid = "*******";
+const char* password = "******";
 
 
 #if defined(CAMERA_MODEL_WROVER_KIT)
