@@ -28,7 +28,7 @@ A new window will pop up. In the search section type **esp32**. Click on the opt
 You are ready to program the ESP CAM now. 
 
 ## Verifying the setup. 
-To verify that everything is working smoothly. Open the file **CameraWebServer** given in the respository.
+To verify that everything is working smoothly. Open the file **CameraWebServer.ino** given in the respository.
 Change the ssid and password to those of your Wifi router.
 
 Click on **Tools** and make sure all the settings are as follows:
