@@ -57,3 +57,5 @@ Click on **Tools** and make sure all the settings are as follows:
  Congratulations!!. Your ESP CAM is working. 
  
  
+Now comes the hard part. 
+Install esp-idf from this [link](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html#get-started-get-esp-idf).
