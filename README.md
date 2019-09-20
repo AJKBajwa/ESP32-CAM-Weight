@@ -55,3 +55,34 @@ Click on **Tools** and make sure all the settings are as follows:
  It will give you an IP address.
  Open that IP address in the browser, scroll down and click on start streaming. 
  Congratulations!!. Your ESP CAM is working. 
+ 
+ # Main Project
+ ## Pre-requisites
+ To run the main project we require the following pre-requisite hardware:
+  1. ESP32 CAM AI Thinker
+  2. Arduino Uno
+  3. HX711 Amplifier
+  4. Two resistors or a 5V-3V logic converter.
+  5. Weight Scale
+  6. Jumper Cables.
+
+## Setting up the libraries
+The following libraries need to be downloaded and installed in the arduino software. 
+  1. [Async-MQTT](https://github.com/marvinroger/async-mqtt-client.git)
+  2. [Arduino-ESP-32 with base64](https://github.com/espressif/arduino-esp32.git)
+  3. [Async-TCP-Master](https://github.com/me-no-dev/AsyncTCP.git)
+  4. [HX711 Library](https://github.com/bogde/HX711.git)
+  5. [Pub-Sub-Client-MQTT](https://github.com/knolleary/pubsubclient.git)
+  
+## Setting up the Weight Scale
+### Connections
+To convert the Weight Scale to be of use for our project we need to open it and make some enhancements.
+
+First open the weight scale from the back. The wires will be connected to a central processor. It is best to leave most of it as and only change the parts that are required. 
+
+First locate the VCC/3V/5V any of these labels on the chip. This is the power source. If you want to power the weight scale using external power source change cut the wire connected to this label and connect it to the positive of your power source. 
+
+Next locate the label GND **This is essential**. Connect a wire to this pad (You can choose not to cut the GND wire but connecting one to it is essential). Put the second end of this wire into the GND pin of your arduino UNO.
+
+Now comes the part of wiring the load cells. 
+The configuration of the weight scale is as shown in this [image](load-cell.jpg)
