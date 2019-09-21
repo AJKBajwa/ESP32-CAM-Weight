@@ -47,7 +47,7 @@ Now click on **Tools->Boards->Boards Manager**.
 A new window will pop up. In the search section type **esp32**. Click on the option and install. 
 You are ready to program the ESP CAM now. 
 
-## Verifying the setup. 
+### Verifying the setup. 
 To verify that everything is working smoothly. Open the file **CameraWebServer.ino** given in the respository.
 Change the ssid and password to those of your Wifi router.
 
@@ -76,7 +76,7 @@ Click on **Tools** and make sure all the settings are as follows:
  Open that IP address in the browser, scroll down and click on start streaming. 
  Congratulations!!. Your ESP CAM is working. 
 
-## Uploading the Main Code.
+### Uploading the Main Code.
 Download [Click-Pic.ino](/ESP-CAM/Click-Pic.ino) from the repository. 
 Upload it to your ESP.
 Also, remember to connect the GPIO4 of the ESP CAM to digital Pin 6 of your Arduino Uno through resistors making a voltage divider of 3.3 V or a logic converter.
