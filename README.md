@@ -86,3 +86,11 @@ Next locate the label GND **This is essential**. Connect a wire to this pad (You
 
 Now comes the part of wiring the load cells. 
 The configuration of the weight scale is as shown in this [image](load-cell.jpg)
+
+Now find the labels E+ and E- on the weight scale chip. Disconnect both of these and connect them to the E+ and E- of the HX711 amplifier.
+Next set of labels can be either S+ and S- or A+ or A- depending on the weight scale. Connect these to A+ and A- on the HX711.
+
+Wiring the Weight Scale is completed.
+
+### Running the HX711
+Open the HX711 folder in this repository. There will be two codes namely [calibrate.ino](/HX711/calibrate.ino) and [HX711_full.ino](/HX711/HX711_full.ino).
