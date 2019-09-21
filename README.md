@@ -78,7 +78,9 @@ Click on **Tools** and make sure all the settings are as follows:
 
 ### Uploading the Main Code.
 Download [Click-Pic.ino](/ESP-CAM/Click-Pic.ino) from the repository. 
+
 Upload it to your ESP.
+
 Also, remember to connect the GPIO4 of the ESP CAM to digital Pin 6 of your Arduino Uno through resistors making a voltage divider of 3.3 V or a logic converter.
 
 ## Setting up the Weight Scale
