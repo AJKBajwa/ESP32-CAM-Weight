@@ -31,9 +31,9 @@ For setting up the ESP CAM you need the following hardware:
   3. Jumper Cables (Male - Female and Female - Female)
 
 ### Pin-out
-If you have an FTDI, connect your ESP Cam to the FTDI as follows: [ESP CAM to FTDI Wiring](ESP32-CAM-wiring-FTDI1.png).
+If you have an FTDI, connect your ESP Cam to the FTDI as follows: ![ESP CAM to FTDI Wiring](ESP32-CAM-wiring-FTDI1.png).
 
-If you have an Arduino uno, connect your ESP Cam to the Arduino as follows : [ESP CAM to Arduino Wiring](ESP32-CAM-wiring-Arduino.png).
+If you have an Arduino uno, connect your ESP Cam to the Arduino as follows : ![ESP CAM to Arduino Wiring](ESP32-CAM-wiring-Arduino.png).
 
 ### Uploading the code
 ### Pre-requisites
