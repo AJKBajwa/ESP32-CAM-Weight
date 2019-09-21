@@ -31,9 +31,13 @@ For setting up the ESP CAM you need the following hardware:
   3. Jumper Cables (Male - Female and Female - Female)
 
 ### Pin-out
-If you have an FTDI, connect your ESP Cam to the FTDI as follows: ![ESP CAM to FTDI Wiring](ESP32-CAM-wiring-FTDI1.png).
+If you have an FTDI, connect your ESP Cam to the FTDI as follows:
 
-If you have an Arduino uno, connect your ESP Cam to the Arduino as follows : ![ESP CAM to Arduino Wiring](ESP32-CAM-wiring-Arduino.png).
+![ESP CAM to FTDI Wiring](ESP32-CAM-wiring-FTDI1.png).
+
+If you have an Arduino uno, connect your ESP Cam to the Arduino as follows :
+
+![ESP CAM to Arduino Wiring](ESP32-CAM-wiring-Arduino.png).
 
 ### Uploading the code
 ### Pre-requisites
@@ -68,7 +72,9 @@ Click on **Tools** and make sure all the settings are as follows:
  After the settings are complete click on upload. 
  The IDE will start compiling. 
  After the compiling has been completed it will change to uploading, at this moment press the reset button on the ESP-CAM once.
- The following information or something similar will be displayed at the bottom. ![Uploading Code](Uploading-Code.PNG). 
+ The following information or something similar will be displayed at the bottom.
+ 
+ ![Uploading Code](Uploading-Code.PNG). 
  
  Wait for the upload to complete.
  Remove the USB cable.
@@ -96,7 +102,9 @@ First locate the VCC/3V/5V any of these labels on the chip. This is the power so
 Next locate the label GND **This is essential**. Connect a wire to this pad (You can choose not to cut the GND wire but connecting one to it is essential). Put the second end of this wire into the GND pin of your arduino UNO.
 
 Now comes the part of wiring the load cells. 
-The configuration of the weight scale is as shown in this ![image](load-cell.jpg)
+The configuration of the weight scale is as shown in this image.
+
+![image](load-cell.jpg)
 
 Now find the labels E+ and E- on the weight scale chip. Disconnect both of these and connect them to the E+ and E- of the HX711 amplifier.
 Next set of labels can be either S+ and S- or A+ or A- depending on the weight scale. Connect these to A+ and A- on the HX711.
