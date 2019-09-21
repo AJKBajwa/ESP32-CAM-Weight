@@ -1,5 +1,26 @@
 # ESP32-CAM-Weight
 Use ESP32 Cam to upload images to firebase when the weight is above a set level
+
+## Pre-requisites
+To run the main project we require the following pre-requisite hardware:
+  1. ESP32 CAM AI Thinker
+  2. Arduino Uno
+  3. HX711 Amplifier
+  4. Two resistors or a 5V-3V logic converter.
+  5. Weight Scale
+  6. Jumper Cables.
+
+## Install Arduino IDE
+To start programming the ESP-CAM you need to install Arduino IDE on your computer. Click this [link](https://www.arduino.cc/en/Main/Software) to download the arduino IDE.
+
+## Setting up the libraries
+The following libraries need to be downloaded and installed in the arduino software. 
+  1. [Async-MQTT](https://github.com/marvinroger/async-mqtt-client.git)
+  2. [Arduino-ESP-32 with base64](https://github.com/espressif/arduino-esp32.git)
+  3. [Async-TCP-Master](https://github.com/me-no-dev/AsyncTCP.git)
+  4. [HX711 Library](https://github.com/bogde/HX711.git)
+  5. [Pub-Sub-Client-MQTT](https://github.com/knolleary/pubsubclient.git)
+
 ## Setting up the ESP CAM
 ### Pre-requisites
 For setting up the ESP CAM you need the following hardware:
@@ -12,11 +33,10 @@ If you have an FTDI, connect your ESP Cam to the FTDI as follows: [ESP CAM to FT
 
 If you have an Arduino uno, connect your ESP Cam to the Arduino as follows : [ESP CAM to Arduino Wiring](ESP32-CAM-wiring-Arduino.png).
 
-## Uploading the code
+### Uploading the code
 ### Pre-requisites
-To start programming the ESP-CAM you need to install Arduino IDE on your computer. Click this [link](https://www.arduino.cc/en/Main/Software) to download the arduino IDE.
 
-After downloading you need to install the ESP boards. 
+You need to install the ESP boards. 
 Click on **File->Preferences** and add the line below in the Additional Boards Manager URLs:
 
 ```
@@ -55,25 +75,12 @@ Click on **Tools** and make sure all the settings are as follows:
  It will give you an IP address.
  Open that IP address in the browser, scroll down and click on start streaming. 
  Congratulations!!. Your ESP CAM is working. 
- 
- # Main Project
- ## Pre-requisites
- To run the main project we require the following pre-requisite hardware:
-  1. ESP32 CAM AI Thinker
-  2. Arduino Uno
-  3. HX711 Amplifier
-  4. Two resistors or a 5V-3V logic converter.
-  5. Weight Scale
-  6. Jumper Cables.
 
-## Setting up the libraries
-The following libraries need to be downloaded and installed in the arduino software. 
-  1. [Async-MQTT](https://github.com/marvinroger/async-mqtt-client.git)
-  2. [Arduino-ESP-32 with base64](https://github.com/espressif/arduino-esp32.git)
-  3. [Async-TCP-Master](https://github.com/me-no-dev/AsyncTCP.git)
-  4. [HX711 Library](https://github.com/bogde/HX711.git)
-  5. [Pub-Sub-Client-MQTT](https://github.com/knolleary/pubsubclient.git)
-  
+## Uploading the Main Code.
+Download [Click-Pic.ino](/ESP-CAM/Click-Pic.ino) from the repository. 
+Upload it to your ESP.
+Also, remember to connect the GPIO4 of the ESP CAM to digital Pin 6 of your Arduino Uno through resistors making a voltage divider of 3.3 V or a logic converter.
+
 ## Setting up the Weight Scale
 ### Connections
 To convert the Weight Scale to be of use for our project we need to open it and make some enhancements.
@@ -92,5 +99,34 @@ Next set of labels can be either S+ and S- or A+ or A- depending on the weight s
 
 Wiring the Weight Scale is completed.
 
+### Wiring the HX711
+Now, let's connect HX711 to the Arduino Uno.
+  1. Connect the VCC to Arduino 5V.
+  2. Connect GND to Arduino GND.
+  3. Connect DT to Arduino Digital Pin 2.
+  4. Connect SCK to Arduino Digital Pin 3.
 ### Running the HX711
 Open the HX711 folder in this repository. There will be two codes namely [calibrate.ino](/HX711/calibrate.ino) and [HX711_full.ino](/HX711/HX711_full.ino).
+
+First open calibrate.ino and upload it to your Arduino Uno. **(Remember to put the chip back, disconnect the wire connecting Reset and GND and disconnect Rx/TX of the ESP CAM from the Arduino Uno)**. 
+
+After Uploading is completed, open the serial monitor and turn on the weight scale. Remember that there should be nothing on the weight scale at this point. 
+The code will ask you to place something on the weight scale of known weight and enter its weight in grams. 
+**Note: Grams is the unit that I defined. You can easily enter a value in kg here and the weights displayed in the next stage will be in kg units.**
+
+After placing the object. Enter the numeric value of its weight in the serial monitor e.g if the weight of object is 500 g enter 500 in the Serial monitor and press Enter. 
+
+After performing a few iterations. The code will provide you with a value. Note this down. 
+
+Now open HX711_full.ino.
+In the setup function go the following line.
+
+```
+scale.set_scale(-91.56);
+```
+
+Replace the number in the brackets with the one you received from the calibrate code and upload. Open the Serial Monitor and it should start displaying the weight. 
+
+Connect the 3.3V and GND to the ESP-CAM again. Rx/TX are not necessary.
+Congratulations!! The project is complete.
+**Make sure Digital Pin6 is connected to the GPIO4 of the ESP CAM**
