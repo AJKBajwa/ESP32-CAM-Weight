@@ -87,9 +87,21 @@ Click on **Tools** and make sure all the settings are as follows:
 ### Uploading the Main Code.
 Download [Click-Pic.ino](/ESP-CAM/Click-Pic.ino) from the repository. 
 
-Scroll down and look for ssid and password.
+Scroll down and look for:
+
+```
+const char* ssid = "";
+const char* password = "";
+```
+
 Replace these with the ones of your router. 
-Write informatation inside the inverted comas e.g. if your ssid and password are TP-link and 12345, enter them as "TP-link" and "12345".
+Write informatation inside the inverted comas e.g. if your ssid and password are TP-link and 12345, enter them as:
+
+```
+const char* ssid = "TP-link";
+const char* password = "12345";
+```
+
 
 Upload it to your ESP.
 
