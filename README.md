@@ -1,5 +1,7 @@
+![Image](ESP-CAM-pinout.png)
 # ESP32-CAM-Weight
-Use ESP32 Cam to upload images to firebase when the weight is above a set level
+Use ESP32 Cam to upload images to S3 bucker when a new object is placed or taken off of the Weight Scale.
+
 
 ## Pre-requisites
 To run the main project we require the following pre-requisite hardware:
