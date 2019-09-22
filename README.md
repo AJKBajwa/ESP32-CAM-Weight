@@ -142,7 +142,7 @@ Now, let's connect HX711 to the Arduino Uno.
   
 The image showing the connection is as follows. 
 
-![image](HX711-Arduino.png)
+[image](HX711-Arduino.png)
 ### Running the HX711
 Open the HX711 folder in this repository. There will be two codes namely [calibrate.ino](/HX711/calibrate.ino) and [HX711_full.ino](/HX711/HX711_full.ino).
 
