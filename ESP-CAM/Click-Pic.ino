@@ -31,6 +31,7 @@
 #include "soc/timer_group_reg.h"    // Disable watchdog timer
 #include <AsyncMqttClient.h>
 #include <WiFi.h>
+#include <PubSubClient.h>
 #include <C:\Users\AJ_Khalid\Documents\Arduino\libraries\arduino-esp32-master\tools\sdk\include\mbedtls\mbedtls\base64.h>
 
 // Connection timeout;
@@ -71,13 +72,16 @@ AsyncMqttClient mqttClient;
 TimerHandle_t   mqttReconnectTimer;
 TimerHandle_t   wifiReconnectTimer;
 
+WiFiClient espClient;
+PubSubClient client(espClient);
+
 camera_fb_t * fb = NULL;
 bool published = false;
-
+bool take_pic = false;
 // Update these with values suitable for your network.
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "PTCL-Baj";
+const char* password = "lenovo123455";
 
 bool connectMQTT() {
   Serial.println("Connecting to MQTT...");
@@ -89,7 +93,7 @@ bool connectMQTT() {
     Serial.print(".");
     i++;
   }
-  
+
   if ( !mqttClient.connected() )
   {
     Serial.println("Failed to connect to MQTT Broker");
@@ -100,6 +104,7 @@ bool connectMQTT() {
     Serial.println("Connected to MQTT Broker");
     return true;
   }
+
 }
 
 void onMqttConnect(bool sessionPresent)
@@ -241,13 +246,59 @@ void capture()
     return;
   }
 
-  //save2sd();
-
   // Turns off the ESP32-CAM white on-board LED (flash) connected to GPIO 4
   pinMode(4, OUTPUT);
   digitalWrite(4, LOW);
   rtc_gpio_hold_en(GPIO_NUM_4);
-  delay(2000);
+  delay(1000);
+}
+
+void callback(char* topic, byte* payload, unsigned int length)
+{
+  String message = "";
+  Serial.print("Message arrived in topic: ");
+  Serial.println(topic);
+
+  Serial.print("Message:");
+  for (int i = 0; i < length; i++)
+  {
+    message += (char)payload[i];
+  }
+  Serial.println(message);
+  Serial.println("-----------------------");
+  take_pic = true;
+  delay(1000);
+}
+
+void connect_MQTT()
+{
+  Serial.println("Connecting to MQTT...");
+  if (client.connect("ESP32Client", USERNAME, PASSWORD ))
+  {
+    Serial.println("connected");
+  }
+  else
+  {
+    Serial.print("failed with state ");
+    Serial.print(client.state());
+    delay(2000);
+  }
+}
+
+bool subscribe_topic()
+{
+  String topic = "takepic";
+  bool subscribed = client.subscribe(topic.c_str());
+  Serial.print("");
+  if (subscribed)
+  {
+    Serial.println("Subscription to " + topic + " successful");
+  }
+  else
+  {
+    Serial.println("Subscription to " + topic + " failed");
+  }
+  return subscribed;
 }
 
 void setup()
@@ -328,17 +379,36 @@ void setup()
   mqttClient.setCredentials( USERNAME, PASSWORD );
   mqttClient.onConnect (onMqttConnect );
   mqttClient.setServer( MQTT_HOST, MQTT_PORT );
-  connectMQTT();
+
+  // Configure second MQTT client
+  // COnfigure MQTT Broker and callback
+  client.setServer(MQTT_HOST, MQTT_PORT);
+  client.setCallback(callback);
+
+  while (!client.connected())
+    connect_MQTT();
+
+  while (!subscribe_topic());
 }
 
 void loop()
 {
-  if (published)
+  client.loop();
+  if (!client.connected() && !take_pic)
   {
-    sleep();
+    connect_MQTT();
+    while (!subscribe_topic());
   }
-  else
+
+  else if (take_pic)
   {
+    client.disconnect();
     connectMQTT();
+    if (published)
+    {
+      take_pic = false;
+      published = false;
+      mqttClient.disconnect();
+    }
   }
 }
