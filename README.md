@@ -1,6 +1,6 @@
 ![Image](ESP-CAM-pinout.png)
 # ESP32-CAM-Weight
-Use ESP32 Cam to upload images to S3 bucker when a new object is placed or taken off of the Weight Scale.
+Use ESP32 Cam to upload images to S3 bucket when a new object is placed or taken off of the Weight Scale.
 
 
 ## Pre-requisites
@@ -8,9 +8,8 @@ To run the main project we require the following pre-requisite hardware:
   1. ESP32 CAM AI Thinker
   2. Arduino Uno
   3. HX711 Amplifier
-  4. Two resistors or a 5V-3V logic converter.
-  5. Weight Scale
-  6. Jumper Cables.
+  4. Weight Scale
+  5. Jumper Cables.
 
 ## Install Arduino IDE
 To start programming the ESP-CAM you need to install Arduino IDE on your computer. Click this [link](https://www.arduino.cc/en/Main/Software) to download the arduino IDE.
@@ -88,6 +87,13 @@ Click on **Tools** and make sure all the settings are as follows:
 Download [Click-Pic.ino](/ESP-CAM/Click-Pic.ino) from the repository. 
 
 Scroll down and look for:
+```
+#include <C:\Users\AJ_Khalid\Documents\Arduino\libraries\arduino-esp32-master\tools\sdk\include\mbedtls\mbedtls\base64.h>
+```
+
+Replace ```C:\Users\AJ_Khalid\Documents\Arduino\libraries\``` with the directory where the folder ```arduino-esp32-master``` is placed. This library was installed in Setting up the libraries section. 
+
+After this scroll down and look for:
 
 ```
 const char* ssid = "";
@@ -155,6 +161,12 @@ scale.set_scale(-91.56);
 
 Replace the number in the brackets with the one you received from the calibrate code and upload. Open the Serial Monitor and it should start displaying the weight. 
 
-Connect the 3.3V and GND to the ESP-CAM again. Rx/TX are not necessary.
-Congratulations!! The project is complete.
-**Make sure Digital Pin6 is connected to the GPIO4 of the ESP CAM**
+**Make sure Digital Pin6 is connected to the GPIO4 of the ESP 32/ESP8266**
+
+## ESP32/ESP8266 Sender
+Connect the ESP32/ESP8266 dev board to your computer. 
+Open Arduino IDE and choose your board. 
+Then download the code [ESP-Sender.ino](/ESP8266-ESP32/ESP-Sender.ino) from the repository and upload it to your ESP. 
+
+Congratulations!! Your project is complete.
+
