@@ -80,8 +80,8 @@ bool published = false;
 bool take_pic = false;
 // Update these with values suitable for your network.
 
-const char* ssid = "PTCL-Baj";
-const char* password = "lenovo123455";
+const char* ssid = "";
+const char* password = "";
 
 bool connectMQTT() {
   Serial.println("Connecting to MQTT...");
